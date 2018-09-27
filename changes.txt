@@ -1,0 +1,17 @@
+ver 1.1.5, Sep 27 2018
+  moved from subversion to github
+
+ver 1.1.4, Aug 28 2018
+  workaround to read skipStrainList from property file
+
+ver 1.1.3, Aug 21 2018
+  implemented a custom list of strains that should not be processed by the pipeline
+
+ver 1.1.2, Dec 27 2017
+  updated from ANT to GRADLE
+
+ver 1.1.1, Apr 29 2015
+  updated jars
+
+ver 1.1.0, Jul 7 2014
+  updated jars, added log4j.properties

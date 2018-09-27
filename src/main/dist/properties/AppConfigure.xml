@@ -1,0 +1,14 @@
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="manager" class="edu.mcw.rgd.PerpetuateNomenclature2Strain">
+        <property name="version" value="PerpetuateNomenclature2Strain ver. 1.1.5, Sep 27, 2018"/>
+        <property name="strainSkipList"><!-- strains that are not processed by the pipeline -->
+            <list>
+                <value>13207518</value>
+            </list>
+        </property>
+    </bean>
+</beans>
+
+
