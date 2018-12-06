@@ -63,10 +63,12 @@ public class PerpetuateNomenclature2Strain {
 
         // load all strains to be processed
         List<Strain> strains = new ArrayList<>();
+        String msg = "processed strain types: ";
         for( String strainType: getProcessedStrainTypes() ) {
+            msg += strainType + " ";
             strains.addAll(dao.getStrainsByType(strainType));
         }
-        logUpdates.info("strains processed: "+strains.size());
+        logUpdates.info(msg);
 
         // process all strains loaded
         for (Strain strain: strains) {
@@ -140,6 +142,7 @@ public class PerpetuateNomenclature2Strain {
                 //get the gene symbol of the alias (old allele symbol) whose RGDID is linked to the particular strain at (RGD_STRAINS_RGD) table
             }
         }
+        logUpdates.info("strains processed: "+strains.size());
 
         logUpdates.info(updatedStrainCounter+" gene updates, "+aliasCounter+" aliases inserted, "+nomenclatureCounter+" nomen events added" );
     }
