@@ -4,18 +4,15 @@ import edu.mcw.rgd.datamodel.Alias;
 import edu.mcw.rgd.datamodel.Gene;
 import edu.mcw.rgd.datamodel.NomenclatureEvent;
 import edu.mcw.rgd.datamodel.Strain;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import edu.mcw.rgd.process.Utils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.core.io.FileSystemResource;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * A program to update STRAIN_SYMBOL and STRAIN fields in the STRAINS table based on nomenclature event.
@@ -24,18 +21,26 @@ import java.util.Set;
  */
 public class PerpetuateNomenclature2Strain {
 
-    private String version;
     private PerpetuateNomenclature2StrainDAO dao = new PerpetuateNomenclature2StrainDAO();
-    private Log logUpdates = LogFactory.getLog("updates");
-    private Log logExceptions = LogFactory.getLog("exceptions");
+    private Logger logUpdates = Logger.getLogger("updates");
+    private Logger logExceptions = Logger.getLogger("exceptions");
+
+    private String version;
     private List<String> strainSkipList;
+    private List<String> processedStrainTypes;
 
     public static void main(String[] args) throws Exception {
 
         DefaultListableBeanFactory bf = new DefaultListableBeanFactory();
         new XmlBeanDefinitionReader(bf).loadBeanDefinitions(new FileSystemResource("properties/AppConfigure.xml"));
         PerpetuateNomenclature2Strain manager = (PerpetuateNomenclature2Strain) (bf.getBean("manager"));
-        manager.run();
+
+        try {
+            manager.run();
+        } catch(Exception e) {
+            Utils.printStackTrace(e, manager.logExceptions);
+            throw new Exception(e);
+        }
     }
 
     public void run() throws Exception {
@@ -56,10 +61,12 @@ public class PerpetuateNomenclature2Strain {
         String forNotes = note.format(date);
 
 
-
-        // load all transgenic and mutant strains
-        List<Strain> strains = dao.getStrainsByType("mutant");
-        strains.addAll(dao.getStrainsByType("transgenic"));
+        // load all strains to be processed
+        List<Strain> strains = new ArrayList<>();
+        for( String strainType: getProcessedStrainTypes() ) {
+            strains.addAll(dao.getStrainsByType(strainType));
+        }
+        logUpdates.info("strains processed: "+strains.size());
 
         // process all strains loaded
         for (Strain strain: strains) {
@@ -151,6 +158,14 @@ public class PerpetuateNomenclature2Strain {
 
     public List<String> getStrainSkipList() {
         return strainSkipList;
+    }
+
+    public List<String> getProcessedStrainTypes() {
+        return processedStrainTypes;
+    }
+
+    public void setProcessedStrainTypes(List<String> processedStrainTypes) {
+        this.processedStrainTypes = processedStrainTypes;
     }
 }
 
