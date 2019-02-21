@@ -28,6 +28,7 @@ public class PerpetuateNomenclature2Strain {
     private String version;
     private List<String> strainSkipList;
     private List<String> processedStrainTypes;
+    private String nomenclatureRefKey;
 
     public static void main(String[] args) throws Exception {
 
@@ -57,7 +58,7 @@ public class PerpetuateNomenclature2Strain {
         int aliasCounter = 0;
 
         Date date = new Date();
-        Format note = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        Format note = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String forNotes = note.format(date);
 
 
@@ -111,7 +112,7 @@ public class PerpetuateNomenclature2Strain {
                             nomenclatureEvent.setRgdId(strain.getRgdId());
                             nomenclatureEvent.setName(strain.getName());
                             nomenclatureEvent.setSymbol(newStrainSymbol);
-                            nomenclatureEvent.setRefKey("25186");
+                            nomenclatureEvent.setRefKey(getNomenclatureRefKey());
                             nomenclatureEvent.setNomenStatusType("APPROVED");
                             nomenclatureEvent.setDesc("gene nomenclature is perpetuated to the strain symbol");
                             nomenclatureEvent.setEventDate(date);
@@ -124,6 +125,7 @@ public class PerpetuateNomenclature2Strain {
                             strain.setSymbol(newStrainSymbol);
                             strain.setName(newStrain);
                             dao.updateStrain(strain);
+
                             logUpdates.info("STRAIN_RGD_ID:" + strain.getRgdId() + ", STRAIN_SYMBOL:" + strain.getSymbol() +"\n"
                                 + "CURRENT_GENE_SYMBOL:" + currGeneSymbol + ", PREVIOUS_GENE_SYMBOL:" + prevGeneSymbol + "\n"
                                 + "NEW_STRAIN_SYMBOL:" + newStrainSymbol + ", STRAIN:" + strain.getName() + ", NEW_STRAIN:" + newStrain + ", TYPE:"+ strain.getStrainTypeName());
@@ -169,6 +171,14 @@ public class PerpetuateNomenclature2Strain {
 
     public void setProcessedStrainTypes(List<String> processedStrainTypes) {
         this.processedStrainTypes = processedStrainTypes;
+    }
+
+    public void setNomenclatureRefKey(String nomenclatureRefKey) {
+        this.nomenclatureRefKey = nomenclatureRefKey;
+    }
+
+    public String getNomenclatureRefKey() {
+        return nomenclatureRefKey;
     }
 }
 
