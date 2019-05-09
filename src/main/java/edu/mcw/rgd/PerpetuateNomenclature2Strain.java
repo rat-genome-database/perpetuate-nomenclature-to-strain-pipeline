@@ -13,6 +13,8 @@ import java.util.*;
 
 /**
  * Report strains with their symbols inconsistent with gene nomenclature.
+ * That means, we lookup strain nomenclature events; and if a gene symbol used to be a part of gene symbol,
+ * but it is no longer, we report this case.
  * Only the strains with type mutant or transgenic are updated.
  */
 public class PerpetuateNomenclature2Strain {
@@ -113,15 +115,25 @@ public class PerpetuateNomenclature2Strain {
     ///
     void generateEvents(Gene gene, Strain strain, String forNotes) throws Exception {
 
-        if( readOnlyMode ) {
-            logConflicts.info("STRAIN RGD ID: " + strain.getRgdId());
-            logConflicts.info("GENE ALLELE SYMBOL: " + gene.getSymbol());
-            logConflicts.info("STRAIN SYMBOL: " + strain.getSymbol());
-            logConflicts.info("STRAIN NAME:   " + strain.getName());
-            logConflicts.info("SUBSTRAIN NAME:" + strain.getSubstrain());
-            logConflicts.info("");
-            conflictCount++;
-            return;
+        if( readOnlyMode && strain.getSubstrain()!=null ) {
+
+            for( NomenclatureEvent nomen: dao.getNomenclatureEvents(gene.getRgdId())) {
+                String prevGeneSymbol = nomen.getPreviousSymbol();
+                if (prevGeneSymbol == null) {
+                    continue;
+                }
+                if (!strainSymbolDeviatesFromGeneAlleleSymbol(strain.getSymbol(), prevGeneSymbol)) {
+                    logConflicts.info("STRAIN RGD ID: " + strain.getRgdId());
+                    logConflicts.info("STRAIN SYMBOL: " + strain.getSymbol());
+                    logConflicts.info("STRAIN NAME:   " + strain.getName());
+                    logConflicts.info("SUBSTRAIN NAME:" + strain.getSubstrain());
+                    logConflicts.info("CURRENT GENE SYMBOL:  " + gene.getSymbol());
+                    logConflicts.info("PREVIOUS GENE SYMBOL: " + prevGeneSymbol);
+                    logConflicts.info("");
+                    conflictCount++;
+                    return;
+                }
+            }
         }
 
         // strain symbol does not contain gene symbol -- get all nomenclature events
