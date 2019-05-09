@@ -13,7 +13,7 @@ import java.util.*;
 
 /**
  * Report strains with their symbols inconsistent with gene nomenclature.
- * That means, we lookup strain nomenclature events; and if a gene symbol used to be a part of gene symbol,
+ * That means, we lookup strain nomenclature events; and if a gene symbol used to be a part of strain symbol,
  * but it is no longer, we report this case.
  * Only the strains with type mutant or transgenic are updated.
  */
