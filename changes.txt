@@ -1,3 +1,7 @@
+ver 2.0.0, May 9 2019
+  discontinued any strain updates and generation of nomenclature and alias events;
+  instead, we report the strains that should be reviewed for nomenclature changes
+
 ver 1.1.7, Feb 21 2019
   added 'nomenclatureRefKey' to property file
 
