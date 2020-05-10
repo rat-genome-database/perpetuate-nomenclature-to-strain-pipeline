@@ -2,7 +2,7 @@
 
 <beans>
     <bean id="manager" class="edu.mcw.rgd.PerpetuateNomenclature2Strain">
-        <property name="version" value="PerpetuateNomenclature2Strain ver. 2.0.0, May 9, 2019"/>
+        <property name="version" value="PerpetuateNomenclature2Strain  -- build May 10, 2020"/>
         <property name="strainSkipList"><!-- rgd ids of strains that are not processed by the pipeline -->
             <list>
                 <value>13207518</value>

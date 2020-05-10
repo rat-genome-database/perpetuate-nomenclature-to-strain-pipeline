@@ -1,3 +1,6 @@
+May 10, 2020
+  updated jar dependencies
+
 ver 2.0.0, May 9 2019
   discontinued any strain updates and generation of nomenclature and alias events;
   instead, we report the strains that should be reviewed for nomenclature changes
