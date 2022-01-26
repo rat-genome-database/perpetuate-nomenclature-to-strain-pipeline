@@ -2,7 +2,8 @@ package edu.mcw.rgd;
 
 import edu.mcw.rgd.datamodel.*;
 import edu.mcw.rgd.process.Utils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.core.io.FileSystemResource;
@@ -20,9 +21,9 @@ import java.util.*;
 public class PerpetuateNomenclature2Strain {
 
     private PerpetuateNomenclature2StrainDAO dao = new PerpetuateNomenclature2StrainDAO();
-    private Logger logConflicts = Logger.getLogger("conflicts");
-    private Logger logUpdates = Logger.getLogger("updates");
-    private Logger logExceptions = Logger.getLogger("exceptions");
+    private Logger logConflicts = LogManager.getLogger("conflicts");
+    private Logger logUpdates = LogManager.getLogger("updates");
+    private Logger logExceptions = LogManager.getLogger("exceptions");
 
     private String version;
     private List<String> strainSkipList;

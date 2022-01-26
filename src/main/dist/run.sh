@@ -15,5 +15,5 @@ $WORKDIR/_run.sh 2>&1
 
 # send email with conflicts only if there are any conflicts
 if [[ -s $WORKDIR/log/conflicts.log ]]; then
-  mailx -s "[$SERVER] strain nomenclature conflicts" $EMAIL_LIST < $WORKDIR/log/conflicts.log
+  mailx -s "[$SERVER] strain nomenclature conflicts" $EMAIL_LIST < $WORKDIR/logs/conflicts.log
 fi
