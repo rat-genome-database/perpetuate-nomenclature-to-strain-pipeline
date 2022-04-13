@@ -1,3 +1,6 @@
+Apr 13, 2022
+  updated commons dbcp to version 2
+
 Mar 29, 2022
   tuned up logging
 
