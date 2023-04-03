@@ -1,3 +1,6 @@
+Apr 03, 2023
+  updated build.gradle to be compatible with newer gradle versions
+
 Apr 13, 2022
   updated commons dbcp to version 2
 
