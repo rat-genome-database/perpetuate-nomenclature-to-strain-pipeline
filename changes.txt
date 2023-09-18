@@ -1,5 +1,5 @@
 Sep 18, 2023
-  updated jar dependencies
+  updated build.gradle to java 17
 
 Apr 03, 2023
   updated build.gradle to be compatible with newer gradle versions
