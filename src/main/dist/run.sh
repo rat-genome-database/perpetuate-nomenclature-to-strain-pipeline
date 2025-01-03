@@ -10,7 +10,7 @@ if [ "$SERVER" == "REED" ]; then
   EMAIL_LIST=mtutaj@mcw.edu,sjwang@mcw.edu
 fi
 
-WORKDIR=/home/rgddata/pipelines/perpetuateNomenclature2Strain
+WORKDIR=/home/rgddata/pipelines/perpetuate-nomenclature-to-strain-pipeline
 $WORKDIR/_run.sh 2>&1
 
 # send email with conflicts only if there are any conflicts

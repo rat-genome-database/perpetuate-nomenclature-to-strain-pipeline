@@ -1,3 +1,6 @@
+Jan 03, 2025
+  renamed distro to 'perpetuate-nomenclature-to-strain-pipeline'
+
 Jan 16, 2024
   updated dependencies
 

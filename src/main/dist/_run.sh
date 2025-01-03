@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# shell script to run PerpetuateNomenclature2Strain pipeline
+# shell script to run perpetuate-nomenclature-to-strain-pipeline
 . /etc/profile
 
-APPNAME=perpetuateNomenclature2Strain
+APPNAME='perpetuate-nomenclature-to-strain-pipeline'
 APPDIR=/home/rgddata/pipelines/$APPNAME
 
 cd $APPDIR
