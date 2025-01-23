@@ -1,3 +1,6 @@
+Jan 22, 2025
+  github: renamed 'master' to 'main'
+
 Jan 03, 2025
   renamed distro to 'perpetuate-nomenclature-to-strain-pipeline'
 
