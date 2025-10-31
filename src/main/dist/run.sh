@@ -7,7 +7,7 @@ SERVER=`hostname -s | tr '[a-z]' '[A-Z]'`
 
 EMAIL_LIST=mtutaj@mcw.edu
 if [ "$SERVER" == "REED" ]; then
-  EMAIL_LIST=mtutaj@mcw.edu,sjwang@mcw.edu
+  EMAIL_LIST="mtutaj@mcw.edu sjwang@mcw.edu"
 fi
 
 WORKDIR=/home/rgddata/pipelines/perpetuate-nomenclature-to-strain-pipeline
