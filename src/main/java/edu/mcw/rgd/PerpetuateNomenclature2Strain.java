@@ -1,6 +1,7 @@
 package edu.mcw.rgd;
 
 import edu.mcw.rgd.datamodel.*;
+import edu.mcw.rgd.process.MemoryMonitor;
 import edu.mcw.rgd.process.Utils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -54,6 +55,9 @@ public class PerpetuateNomenclature2Strain {
 
         logUpdates.info(getVersion());
 
+        MemoryMonitor memoryMonitor = new MemoryMonitor();
+        memoryMonitor.start();
+
         Set<Integer> strainSkipSet = new HashSet<>();
         for( String strainRgdIdStr: getStrainSkipList() ) {
             strainSkipSet.add(Integer.parseInt(strainRgdIdStr));
@@ -96,6 +100,9 @@ public class PerpetuateNomenclature2Strain {
         } else {
             logUpdates.info(updatedStrainCounter + " gene updates, " + aliasCounter + " aliases inserted, " + nomenclatureCounter + " nomen events added");
         }
+
+        memoryMonitor.stop();
+        logUpdates.info(memoryMonitor.getSummary());
     }
 
     boolean strainSymbolDeviatesFromGeneAlleleSymbol(String strainSymbol, String geneSymbol) {
