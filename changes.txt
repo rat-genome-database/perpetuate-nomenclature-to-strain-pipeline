@@ -1,3 +1,6 @@
+Jul 7, 2026
+  fixed conflicts email not being sent; updated dependencies
+
 Apr 16, 2026
   added memory usage monitoring
 
