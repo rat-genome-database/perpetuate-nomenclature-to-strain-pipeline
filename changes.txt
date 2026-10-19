@@ -1,3 +1,6 @@
+Oct 19, 2026
+  dev: migration to postgres
+
 Jul 7, 2026
   fixed conflicts email not being sent; updated dependencies
 
